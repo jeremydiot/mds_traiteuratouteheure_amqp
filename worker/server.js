@@ -17,7 +17,7 @@ amqplib.connect(`amqp://${(process.env.EXECUTION_ENVIRONMENT === 'production')?'
       if(msg !== null){
 
         // get order from database
-        let order = await orderRepository.fetch(msg.content.toString())
+        const order = await orderRepository.fetch(msg.content.toString())
 
         // update flag
         order.flag = 'commande traitée'

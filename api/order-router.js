@@ -3,18 +3,18 @@ import { orderRepository } from "./order-repository.js"
 import amqplib from "amqplib/callback_api.js"
 const queue = 'orders'
 
-export let orderRouter  = Router()
+export const orderRouter  = Router()
 
 // create order route
 orderRouter.post('/', async (req,res)=>{
 
   // create order database object
-  let order = orderRepository.createEntity()
+  const order = orderRepository.createEntity()
   order.flag = 'commande en cours de traitement'
   order.dish = req.body.dish ?? null
 
   // save order in database and get id
-  let entityId = await orderRepository.save(order)
+  const entityId = await orderRepository.save(order)
 
   // send new id in response
   res.type('application/json')
@@ -40,7 +40,7 @@ orderRouter.post('/', async (req,res)=>{
 orderRouter.get('/:id', async (req, res)=>{
 
   // get order from database
-  let order = await orderRepository.fetch(req.params.id)
+  const order = await orderRepository.fetch(req.params.id)
 
   // send database object content in response
   res.type('application/json')
