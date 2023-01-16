@@ -22,9 +22,18 @@ docker stop traiteuratouteheureamqp_worker
 
 # start worker
 docker start traiteuratouteheureamqp_worker
+
+# if you want to use others ports for rabbitmq interface or order API
+# execute following commands before run ./start.sh
+export API_PORT=3000 # change port
+export RABBITMQ_PORT=15672 # change port
 ```
 
+> Order API is located at <http://localhost:3000>  
 > Rabitmq interface is located at <http://localhost:15672/#/queues>
+>
+>- username: guest
+>- password: guest
 
 ### Developpment
 
@@ -44,7 +53,11 @@ cd worker/
 npm run start
 ```
 
+> Order API is located at <http://localhost:3000>  
 > Rabitmq interface is located at <http://localhost:15672/#/queues>
+>
+>- username: guest
+>- password: guest
 
 ## Docs
 
