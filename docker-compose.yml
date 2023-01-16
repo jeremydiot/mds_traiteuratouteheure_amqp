@@ -1,0 +1,17 @@
+version: '3'
+services:
+
+  rabbitmq:
+    container_name: traiteuratouteheureamqp_rabbitmq
+    hostname: rabbitmq
+    image: rabbitmq:3.11-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  redis:
+    container_name: traiteuratouteheureamqp_redis
+    hostname: redis
+    image: redis/redis-stack:latest
+    ports:
+      - 6379:6379

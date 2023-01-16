@@ -1,0 +1,19 @@
+{
+  "name": "traiteuratouteheureamqp-worker",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Jeremy DIOT",
+  "license": "MIT",
+  "dependencies": {
+    "amqplib": "^0.10.3",
+    "redis-om": "^0.3.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "private": true
+}

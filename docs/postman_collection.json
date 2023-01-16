@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "bd7195fe-d101-4695-81c4-e3623e821dcd",
+		"name": "traiteur à toute heure AMQP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"dish\":\"lasagnes\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/order",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get order by entityId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/order/01GPXYNV6G6NSBKCTAF2YZFBGD",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"order",
+						"01GPXYNV6G6NSBKCTAF2YZFBGD"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,38 @@
+version: '3'
+services:
+
+  api:
+    container_name: traiteuratouteheureamqp_api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    environment:
+      - EXECUTION_ENVIRONMENT=production
+    ports:
+      - ${API_PORT:-3000}:3000
+    depends_on:
+      - rabbitmq
+      - redis
+
+  worker:
+    container_name: traiteuratouteheureamqp_worker
+    build:
+      context: ./worker
+      dockerfile: Dockerfile
+    environment:
+      - EXECUTION_ENVIRONMENT=production
+    depends_on:
+      - rabbitmq
+      - redis
+
+  rabbitmq:
+    container_name: traiteuratouteheureamqp_rabbitmq
+    hostname: rabbitmq
+    image: rabbitmq:3.11-management
+    ports:
+      - ${RABBITMQ_PORT:-15672}:15672
+
+  redis:
+    container_name: traiteuratouteheureamqp_redis
+    hostname: redis
+    image: redis/redis-stack:latest
