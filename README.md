@@ -46,10 +46,12 @@ docker compose down
 
 ## start api
 cd api/
+npm install
 npm run start
 
 ## start worker
 cd worker/
+npm install
 npm run start
 ```
 
