@@ -1,7 +1,9 @@
 import { Router } from "express"
 import { orderRepository } from "./order-repository.js"
 import amqplib from "amqplib/callback_api.js"
-const queue = 'orders'
+const queueName = 'orders'
+const exchangeName = 'orderExchange'
+const exchangeType = 'fanout'
 
 export const orderRouter  = Router()
 
@@ -25,12 +27,20 @@ orderRouter.post('/', async (req,res)=>{
     if(err) throw err
     
     // get new database order id to 'orders' queue
-    conn.createChannel((err, channel) =>{
+    conn.createChannel(async (err, channel) =>{
       if(err) throw err
-      channel.assertQueue(queue, {durable: true})
       
-      // create new message in queue
-      channel.sendToQueue(queue, Buffer.from(entityId), {persistent: true})
+      // create exchange
+      await channel.assertExchange(exchangeName, exchangeType, { durable: true, autoDelete: false })
+      // create queue
+      const q = await channel.assertQueue(queueName, {durable: true})
+      // bin exchange to queue
+      await channel.bindQueue(q.queue, exchangeName, '')
+      // send message to exchange then to queue
+      channel.publish(exchangeName, '', Buffer.from( JSON.stringify({entityId,message:'créer plat'})))
+
+      console.log(`API send: ${entityId}`)
+
     })
 
   })
